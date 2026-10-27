@@ -4,10 +4,10 @@ services:
     container_name: smp-mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: smp_root_dev_password
-      MYSQL_DATABASE: smp_servicos
-      MYSQL_USER: smp_user
-      MYSQL_PASSWORD: smp_dev_password
+     MYSQL_ROOT_PASSWORD: exemplo_root_local
+    MYSQL_DATABASE: smp_servicos
+    MYSQL_USER: smp_user
+    MYSQL_PASSWORD: exemplo_usuario_local
     ports:
       - "3306:3306"
     volumes:
