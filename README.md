@@ -23,7 +23,8 @@ Python, Flask, HTML/CSS, MySQL 8 e Docker Compose.
 8. Acesse `http://127.0.0.1:5000`.
 
 ## Banco de dados
-Host `127.0.0.1`, porta `3307`, banco `smp_servicos`, usuário `smp_user`, senha local `smp_dev_password`.
+Host `127.0.0.1`, porta `3307`, banco `smp_servicos`,
+usuário root, senha configurada localmente.
 
 ## Limites
 Os dados são inseridos manualmente; não há integração automática com sistemas governamentais ou SAP. Use apenas dados fictícios. As credenciais do Docker são apenas para desenvolvimento local, não para produção.
