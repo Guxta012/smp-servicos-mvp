@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %}Início | SMP Serviços{% endblock %}{% block content %}
+<div class="heading"><div><h1>Olá, Sabrina!</h1><p>Acompanhe o faturamento e a situação dos impostos das empresas.</p></div></div>
+<div class="stats"><article><small>Empresas cadastradas</small><strong>{{ total }}</strong><a href="{{ url_for('empresas') }}">Ver empresas →</a></article>
+<article><small>Faturamento do mês</small><strong>{{ "R$ {:,.2f}".format(faturamento).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong><a href="{{ url_for('empresas') }}">Ver detalhes →</a></article>
+<article><small>Impostos pendentes/atrasados</small><strong>{{ pendentes }}</strong><a href="{{ url_for('impostos') }}">Ver impostos →</a></article></div>
+<div class="section-title"><h2>Ações rápidas</h2></div><div class="actions">
+<a href="{{ url_for('empresas') }}"><b>＋ Cadastrar empresa</b><small>Registre uma empresa e seu faturamento.</small></a>
+<a href="{{ url_for('empresas') }}"><b>▦ Consultar empresas</b><small>Pesquise os dados cadastrados.</small></a>
+<a href="{{ url_for('impostos') }}"><b>▣ Visualizar impostos</b><small>Consulte pagamentos e pendências.</small></a></div>
+<div class="section-title"><h2>Empresas recentes</h2><a href="{{ url_for('empresas') }}">Ver todas →</a></div>
+<div class="table-wrap"><table><thead><tr><th>Empresa</th><th>CNPJ</th><th>Faturamento mensal</th><th>Referência</th></tr></thead><tbody>
+{% for e in recentes %}<tr><td>{{ e.nome }}</td><td>{{ e.cnpj }}</td><td>{{ "R$ {:,.2f}".format(e.valor or 0).replace(",", "X").replace(".", ",").replace("X", ".") }}</td><td>{{ e.mes_referencia or "—" }}</td></tr>{% else %}<tr><td colspan="4">Nenhuma empresa cadastrada.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}
