@@ -10,7 +10,7 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY", "chave-local-apenas-para-desenvol
 
 DB_CONFIG = {
     "host": os.getenv("DB_HOST", "127.0.0.1"),
-    "port": int(os.getenv("DB_PORT", "3306")),
+    "port": int(os.getenv("DB_PORT", "3307")),
     "user": os.getenv("DB_USER", "smp_user"),
     "password": os.getenv("DB_PASSWORD", "smp_dev_password"),
     "database": os.getenv("DB_NAME", "smp_servicos"),
