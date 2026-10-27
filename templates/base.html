@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}SMP Serviços{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head>
+<body><div class="layout"><aside class="sidebar">
+<a class="brand" href="{{ url_for('index') }}"><span class="logo">▥</span><span><b>SMP Serviços</b><small>Gestão Contábil</small></span></a>
+<nav><a class="{{ 'active' if request.endpoint=='index' else '' }}" href="{{ url_for('index') }}">⌂ &nbsp; Início</a>
+<a class="{{ 'active' if request.endpoint in ['empresas','detalhe_empresa'] else '' }}" href="{{ url_for('empresas') }}">▦ &nbsp; Empresas</a>
+<a class="{{ 'active' if request.endpoint=='impostos' else '' }}" href="{{ url_for('impostos') }}">▣ &nbsp; Impostos</a></nav>
+<div class="foot">MVP acadêmico · Dados fictícios</div></aside><main><header>SMP Serviços / {% block crumb %}Início{% endblock %}<span class="profile">SP &nbsp; Sabrina Prado · Administradora (demo)</span></header><section class="content">
+{% with messages=get_flashed_messages(with_categories=true) %}{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endwith %}
+{% block content %}{% endblock %}</section></main></div></body></html>
