@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Impostos | SMP Serviços{% endblock %}{% block crumb %}Impostos{% endblock %}{% block content %}
+<div class="heading"><div><h1>Faturamento e situação dos impostos</h1><p>Registre impostos e acompanhe os status informados.</p></div></div>
+<div class="panel"><h2>Registrar imposto</h2><form method="post" class="form">
+<label>Empresa *<select name="empresa_id" required><option value="">Selecione</option>{% for e in empresas %}<option value="{{ e.id }}" {% if filtro==e.id %}selected{% endif %}>{{ e.nome }}</option>{% endfor %}</select></label>
+<label>Imposto *<input name="nome" required placeholder="Ex.: ISS"></label><label>Vencimento *<input name="vencimento" type="date" required></label>
+<label>Valor (R$) *<input name="valor" required inputmode="decimal" placeholder="450,00"></label><label>Situação *<select name="situacao"><option>Pendente</option><option>Pago</option><option>Atrasado</option></select></label>
+<label>Observação<input name="observacao" placeholder="Opcional"></label><div class="wide"><button>Salvar imposto</button></div></form></div>
+<div class="section-title"><h2>Impostos registrados</h2></div><div class="table-wrap"><table><thead><tr><th>Empresa</th><th>Imposto</th><th>Vencimento</th><th>Valor</th><th>Situação</th><th>Observação</th></tr></thead><tbody>
+{% for i in impostos %}<tr><td>{{ i.empresa_nome }}</td><td>{{ i.nome }}</td><td>{{ i.vencimento }}</td><td>{{ "R$ {:,.2f}".format(i.valor).replace(",", "X").replace(".", ",").replace("X", ".") }}</td><td><span class="badge {{ i.situacao|lower }}">{{ i.situacao }}</span></td><td>{{ i.observacao or "—" }}</td></tr>{% else %}<tr><td colspan="6">Nenhum imposto cadastrado.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}
