@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Empresas | SMP Serviços{% endblock %}{% block crumb %}Empresas{% endblock %}{% block content %}
+<div class="heading"><div><h1>Cadastro e consulta de empresas</h1><p>Cadastre uma empresa e registre seu faturamento mensal.</p></div></div>
+<div class="panel"><h2>Cadastrar nova empresa</h2><form method="post" class="form">
+<label>Nome da empresa *<input name="nome" required placeholder="Ex.: Comercial Alfa Ltda"></label><label>CNPJ *<input name="cnpj" required placeholder="00.000.000/0000-00"></label>
+<label>Faturamento mensal (R$) *<input name="faturamento" required inputmode="decimal" placeholder="25800,00"></label><label>Mês de referência *<input name="mes_referencia" type="month" required></label>
+<div class="wide"><button>Salvar empresa</button> <button type="reset" class="secondary">Limpar</button></div></form></div>
+<div class="section-title"><h2>Empresas cadastradas</h2></div><div class="table-wrap"><table><thead><tr><th>Empresa</th><th>CNPJ</th><th>Faturamento</th><th>Referência</th><th>Ação</th></tr></thead><tbody>
+{% for e in empresas %}<tr><td>{{ e.nome }}</td><td>{{ e.cnpj }}</td><td>{{ "R$ {:,.2f}".format(e.faturamento).replace(",", "X").replace(".", ",").replace("X", ".") }}</td><td>{{ e.mes_referencia or "—" }}</td><td><a href="{{ url_for('detalhe_empresa',empresa_id=e.id) }}">Detalhes</a></td></tr>{% else %}<tr><td colspan="5">Nenhuma empresa cadastrada.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}
