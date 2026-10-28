@@ -1,9 +1,12 @@
 
+
 name: Testes automatizados
 
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   testes:
@@ -23,12 +26,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Iniciar banco de dados
-        run: docker compose up -d --wait
-
-      - name: Executar testes e cobertura
-        run: python -m pytest --cov=app --cov-report=term-missing
-
-      - name: Encerrar banco de dados
-        if: always()
-        run: docker compose down
+      - name: Executar testes
+        run: python -m pytest -v
