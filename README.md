@@ -28,3 +28,11 @@ usuário root, senha configurada localmente.
 
 ## Limites
 Os dados são inseridos manualmente; não há integração automática com sistemas governamentais ou SAP. Use apenas dados fictícios. As credenciais do Docker são apenas para desenvolvimento local, não para produção.
+
+## Auto-revisão técnica
+
+- **Arquitetura:** aplicação organizada com Flask, templates HTML e banco de dados MySQL.
+- **Legibilidade:** nomes de funções e arquivos relacionados às suas responsabilidades.
+- **Segurança:** credenciais configuráveis por variáveis de ambiente, sem expor senhas pessoais.
+- **Validação:** os dados dos formulários devem ser verificados antes de serem salvos.
+- **Melhorias futuras:** ampliar os testes automatizados e o tratamento de erros.
