@@ -1,20 +1,31 @@
 import os
+from urllib.parse import urlparse
 from datetime import date
 from decimal import Decimal, InvalidOperation
 from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
 from mysql.connector import Error
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "chave-local-apenas-para-desenvolvimento")
 
+load_dotenv()
+
+
+database_url = os.getenv("DATABASE_URL")
+
+url = urlparse(database_url)
+
 DB_CONFIG = {
-    "host": os.getenv("DB_HOST", "127.0.0.1"),
-    "port": int(os.getenv("DB_PORT", "3307")),
-    "user": os.getenv("DB_USER", "smp_user"),
-    "password": os.getenv("DB_PASSWORD", "smp_dev_password"),
-    "database": os.getenv("DB_NAME", "smp_servicos"),
+    "host": url.hostname,
+    "port": url.port,
+    "user": url.username,
+    "password": url.password,
+    "database": url.path.lstrip("/"),
+    "ssl_disabled": False,
 }
+
 
 def connect_db():
     return mysql.connector.connect(**DB_CONFIG)
@@ -154,4 +165,4 @@ def detalhe_empresa(empresa_id):
                            faturamentos=faturamentos, impostos=impostos)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=int(os.getenv("PORT", "5000")))
+    app.run(debug=True, host="0.0.0.0", port=int(os.getenv("PORT", "5000")))
